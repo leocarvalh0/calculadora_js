@@ -17,8 +17,6 @@ const apagar = document.getElementById('apagar');
 let res = document.querySelector('.resultado');
 let res2 = document.querySelector('.cima');
 
-const beep = new Audio("../public/assets/audio/beep.wav")
-
 let sinal;
 let num1 = 0;
 let num2 = 0;
@@ -94,7 +92,6 @@ subtrair.addEventListener('click', () => {
 })
 
 calcular.addEventListener('click', () => {
-    beep.play();
     res2.innerHTML = `${num1} ${sinal} ${num2}`
     exibeResultado();
 })
@@ -109,7 +106,6 @@ apagar.addEventListener('click', () => {
 
 function atualiza(valor) {
     res.innerHTML += valor.value;
-    beep.play();
 }
 
 function separaNumeros(valor) {
