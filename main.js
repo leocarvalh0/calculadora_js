@@ -15,107 +15,114 @@ const subtrair = document.getElementById('subtrair');
 const calcular = document.getElementById('calcular');
 const apagar = document.getElementById('apagar');
 let res = document.querySelector('.resultado');
+let res2 = document.querySelector('.cima');
 
 const beep = new Audio("../public/assets/audio/beep.wav")
-let expressao = [];
+
 let sinal;
-let numeros1 = [];
-let numeros2 = [];
+let num1 = 0;
+let num2 = 0;
 
 zero.addEventListener('click', () => {
-    atualiza(zero, expressao);
+    atualiza(zero);
+    separaNumeros(um);
 })
 
 um.addEventListener('click', () => {
-    atualiza(um, expressao);
+    atualiza(um);
+    separaNumeros(um);
 })
 
 dois.addEventListener('click', () => {
-    atualiza(dois, expressao);
+    atualiza(dois);
+    separaNumeros(dois);
 })
 
 tres.addEventListener('click', () => {
-    atualiza(tres, expressao);
+    atualiza(tres);
+    separaNumeros(tres);
 })
 
 quatro.addEventListener('click', () => {
-    atualiza(quatro, expressao);
+    atualiza(quatro);
+    separaNumeros(quatro);
 })
 
 cinco.addEventListener('click', () => {
-    atualiza(cinco, expressao);
+    atualiza(cinco);
+    separaNumeros(cinco);
 })
 
 seis.addEventListener('click', () => {
-    atualiza(seis, expressao);
+    atualiza(seis);
+    separaNumeros(seis);
 })
 
 sete.addEventListener('click', () => {
-    atualiza(sete, expressao);
+    atualiza(sete);
+    separaNumeros(sete);
 })
 
 oito.addEventListener('click', () => {
-    atualiza(oito, expressao);
+    atualiza(oito);
+    separaNumeros(oito);
 })
 
 nove.addEventListener('click', () => {
-    atualiza(nove, expressao);
+    atualiza(nove);
+    separaNumeros(nove);
 })
 
 multiplicar.addEventListener('click', () => {
-    atualiza(multiplicar, expressao);
+    atualiza(multiplicar);
     sinal = multiplicar.value;
 })
 
 dividir.addEventListener('click', () => {
-    atualiza(dividir, expressao);
+    atualiza(dividir);
     sinal = dividir.value;
 })
 
 somar.addEventListener('click', () => {
-    atualiza(somar, expressao);
+    atualiza(somar);
     sinal = somar.value;
 })
 
 subtrair.addEventListener('click', () => {
-    atualiza(subtrair, expressao);
+    atualiza(subtrair);
     sinal = subtrair.value;
 })
 
 calcular.addEventListener('click', () => {
     beep.play();
-    separaNumeros(expressao);
-    exibeResultado(numeros1, numeros2);
+    res2.innerHTML = `${num1} ${sinal} ${num2}`
+    exibeResultado();
 })
 
 apagar.addEventListener('click', () => {
+    num1 = 0;
+    num2 = 0;
+    sinal = '';
     res.innerHTML = '';
-    expressao = [];
-    console.log(expressao)
+    res2.innerHTML = '';
 })
 
-function atualiza(valor, expressao) {
+function atualiza(valor) {
     res.innerHTML += valor.value;
-    expressao.push(valor.value);
     beep.play();
 }
 
-function separaNumeros(expressao) {
-    const index = expressao.indexOf(sinal);
-
-    for (let i=0; i < index; i++) {
-        numeros1.push(expressao[i])
-    }
-    
-    for (let i=index+1; i < expressao.length; i++) {
-        numeros2.push(expressao[i])
+function separaNumeros(valor) {
+    if (sinal) {
+        num2 = Number(num2 + valor.value);
+        console.log('num2 = ' + num2)
+    } else {
+        num1 = Number(num1 + valor.value);
+        console.log('num1 = ' + num1)
     }
 }
 
-function exibeResultado(array1, array2) {
-    let num1 = Number(array1.join(''));
-    let num2 = Number(array2.join(''));
-
+function exibeResultado() {
     switch(sinal) {
         case "x": 
             res.innerHTML = num1 * num2;
